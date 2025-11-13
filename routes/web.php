@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    // Tambah data directorate & departemen
     Route::post('/directorate', [DashboardController::class, 'storeDirectorate']);
     Route::post('/departemen', [DashboardController::class, 'storeDepartemen']);
 
