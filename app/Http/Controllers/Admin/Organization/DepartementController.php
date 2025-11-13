@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class DepartementController extends Controller
 {
-    function departemenCreate(Request $request)
+    function departementCreate(Request $request)
     {
         // Validasi input
         $request->validate([
@@ -30,7 +30,7 @@ class DepartementController extends Controller
 
         return Inertia::render('departement', [
             'departemen' => $depart,
-            'divisions' => $divisions, // ⬅️ Kirim ke frontend
+            'divisions' => $divisions,
         ]);
     }
 }

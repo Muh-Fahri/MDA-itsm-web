@@ -10,7 +10,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, departement } from '@/routes';
+import { dashboard, departement, directRead, divisi, } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
@@ -31,6 +31,24 @@ const departNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
 ];
+
+const directNavItems: NavItem[] = [
+    {
+        title: 'Directorate',
+        href: directRead(),
+        icon: LayoutGrid
+    }
+]
+
+
+const divNavItems: NavItem[] = [
+    {
+        title: 'Division',
+        href: divisi(),
+        icon: LayoutGrid
+    }
+]
+
 
 
 const footerNavItems: NavItem[] = [
@@ -63,6 +81,8 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
+                <NavMain items={directNavItems} />
+                <NavMain items={divNavItems} />
                 <NavMain items={departNavItems} />
             </SidebarContent>
             <SidebarFooter>

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Directorate extends Model
 {
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     function divisi()
     {
-        return $this->hasMany(Division::class, 'directorat_id');
+        return $this->hasMany(Division::class, 'directorate_id');
     }
 }

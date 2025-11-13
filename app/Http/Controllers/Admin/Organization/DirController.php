@@ -13,10 +13,11 @@ class DirController extends Controller
 {
     function readDirectorate()
     {
-        $directorates = Directorate::all(); // ambil semua data
 
-        return Inertia::render('dashboard', [
-            'directorates' => $directorates, // kirim ke view
+        $directorates = Directorate::all();
+
+        return Inertia::render('directorate', [
+            'directorates' => $directorates
         ]);
     }
 
@@ -31,29 +32,5 @@ class DirController extends Controller
         ]);
 
         return response()->json($directorate);
-    }
-
-    function deleteDirectorate($id)
-    {
-        $dir = Directorate::where('id', $id)->get();
-        $dir->delete();
-
-        return view('dashboard');
-    }
-
-    function dashboard()
-    {
-        $directorates = Directorate::all();
-        $divisions = Division::all();
-        $departemen = Departement::all();
-
-        return Inertia::render('dashboard', [
-            'directorates' => $directorates,
-            'divisions' => $divisions,
-            'departemen' => $departemen,
-            'total_departements' => $departemen->count(),
-            'total_projects' => 0, // sesuaikan
-            'total_users' => 0,    // sesuaikan
-        ]);
     }
 }

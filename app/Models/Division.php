@@ -12,7 +12,7 @@ class Division extends Model
         'directorat_id'
     ];
 
-    public function directorat(): BelongsTo
+    public function directorate(): BelongsTo
     {
         return $this->belongsTo(Directorate::class, 'directorat_id');
     }

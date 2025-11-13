@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Head, usePage } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
+import axios from 'axios';
 import { dashboard, departement as departementIndex } from '@/routes';
 
-// --- Interface Definitions ---
+
+
 interface Division {
     id: number;
     name: string;
@@ -19,8 +21,6 @@ interface DepartementProps {
     departemen: Departemen[];
     divisions: Division[];
 }
-
-// --- Breadcrumbs ---
 const breadcrumbs = [
     { title: 'Dashboard', href: dashboard().url },
     { title: 'Manajemen Departemen', href: departementIndex().url },
@@ -42,7 +42,6 @@ const FeedbackMessage: React.FC<{ message: string; type: 'success' | 'error' }> 
 };
 
 export default function Departement() {
-    // Ambil props dari Inertia (server)
     const { departemen = [], divisions = [] } =
         usePage().props as unknown as DepartementProps;
 
@@ -50,8 +49,6 @@ export default function Departement() {
     const [selectedDivisionId, setSelectedDivisionId] = useState<number | ''>('');
     const [formDept, setFormDept] = useState({ name: '' });
     const [feedbackMessage, setFeedbackMessage] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
-
-    // --- Submit Form ---
     const submitDept = async (e: React.FormEvent) => {
         e.preventDefault();
         setFeedbackMessage(null);
@@ -62,13 +59,12 @@ export default function Departement() {
         }
 
         try {
-            const newId = Date.now();
-            const newDepart = {
-                id: newId,
+            const response = await axios.post('/departemen', {
                 name: formDept.name,
-                divisions_id: Number(selectedDivisionId),
-            };
+                divisions_id: selectedDivisionId,
+            });
 
+            const newDepart = response.data;
             setDepartState([...departState, newDepart]);
             setFeedbackMessage({ message: 'Departemen berhasil ditambahkan!', type: 'success' });
             setFormDept({ name: '' });
@@ -89,8 +85,6 @@ export default function Departement() {
                     message={feedbackMessage?.message || ''}
                     type={feedbackMessage?.type || 'success'}
                 />
-
-                {/* Form Tambah Departemen */}
                 <section className="p-6 border border-gray-200 rounded-xl dark:border-gray-700">
                     <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-6">
                         Tambah Departemen Baru
@@ -141,8 +135,6 @@ export default function Departement() {
                         </div>
                     </form>
                 </section>
-
-                {/* Tabel Departemen */}
                 <section>
                     <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-4">
                         Daftar Departemen ({departState.length})

@@ -17,10 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('directorat_id');
             $table->timestamps();
 
-            $table->foreign('directorat_id')
-                ->references('id')
-                ->on('directorates')
-                ->onDelete('cascade');
+            $table->foreign('directorat_id')->references('id')->on('directorates')->onDelete('cascade');
         });
     }
 
