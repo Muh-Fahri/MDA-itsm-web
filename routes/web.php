@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DirController::class, 'readDirectorate'])->name('dashboard');
     Route::post('/dashboard', [DirController::class, 'createDirectorate'])->name('directorateCreate');
     Route::delete('/dashboard/delete/{id}', [DirController::class, 'deleteDirectorate'])->name('directorateDelete');
+    Route::get('/dashboard', [DirController::class, 'dashboard'])->name('dashboard');
 
 
     Route::post('/departemen', [DepartementController::class, 'departementCreate'])->name('departementCreate');

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('departements', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('divisions_id'); // harus sama tipe: unsignedBigInteger
+            $table->unsignedBigInteger('divisions_id');
             $table->timestamps();
 
             $table->foreign('divisions_id')
